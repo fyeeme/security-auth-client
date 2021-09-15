@@ -30,6 +30,9 @@ const onSubmit = (e) => {
     })
     .then((data) => {
       console.log("Success:", data);
+      //授权获取授权码
+      window.location =
+        "/api/oauth2/authorize?response_type=code&client_id=client&scope=read";
     })
     .catch((error) => {
       console.error("Error:", error);
