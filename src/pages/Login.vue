@@ -29,8 +29,12 @@ const onSubmit = (e) => {
       },
     })
     .then((data) => {
-      console.log("Success:", data);
-      //授权获取授权码
+      console.log(
+        "Success:",
+        data,
+        "/api/oauth2/authorize?response_type=code&client_id=client&scope=read"
+      );
+      // 授权获取授权码;
       window.location =
         "/api/oauth2/authorize?response_type=code&client_id=client&scope=read";
     })

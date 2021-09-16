@@ -1,15 +1,18 @@
 <template>
   <div>authorized</div>
   {{ route.query }}
+
+  <div>{{ accessToken }}</div>
 </template>
 
 <script setup>
 import { useRoute } from "vue-router";
 import axios from "axios";
+import { ref } from "vue";
 
 const route = useRoute();
-console.log();
 const { code } = route.query;
+const accessToken = ref(null);
 //获取 accessToken and refreshToken
 axios
   .post(
@@ -30,8 +33,9 @@ axios
         "/api/oauth2/token?grant_type=refresh_token&refresh_token=" +
           res.data.refresh_token
       )
-      .then((res) => {
-        console.log(28, "refresh token", res.data);
+      .then((response) => {
+        accessToken.value = response.data.access_token;
+        console.log(28, "refresh token", response.data);
       });
   });
 // http://localhost:8080/oauth2/token?grant_type=refresh_token&refresh_token=
